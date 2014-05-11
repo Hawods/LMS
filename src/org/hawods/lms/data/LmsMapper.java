@@ -4,6 +4,17 @@ import java.util.List;
 
 import org.hawods.lms.model.LmsVo;
 
+/**
+ * 
+ * sql映射
+ * <p>
+ * 用ibatis实现sql映射
+ * <p>
+ * 
+ * @author hawods
+ * @version 1.0
+ * @since 1.0
+ */
 public interface LmsMapper {
 	public int checkTable();
 

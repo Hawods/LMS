@@ -13,6 +13,7 @@
 		<setting name="logImpl" value="LOG4J2" />
 	</settings>
 	<typeAliases>
+		<!-- 不知道为什么，在linux下可用，在windows系统下就不起作用，有待研究 -->
 		<package name="org.hawods.lms.data" />
 		<package name="org.hawods.lms.model" />
 	</typeAliases>

@@ -2,6 +2,17 @@ package org.hawods.lms.model;
 
 import java.sql.Date;
 
+/**
+ * 
+ * 值对象
+ * <p>
+ * 封装数据库列，<b>有待优化</b>
+ * <p>
+ * 
+ * @author hawods
+ * @version 1.0
+ * @since 1.0
+ */
 public class LmsVo {
 	private String id;
 	private String name;
@@ -35,6 +46,12 @@ public class LmsVo {
 		return name;
 	}
 
+	/**
+	 * 只有当新的值与原值不同时才执行，并返回<code>true</code>
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public boolean setName(String name) {
 		if (name != null && !name.equals(this.name)) {
 			this.name = name;

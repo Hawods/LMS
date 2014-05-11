@@ -44,6 +44,17 @@ import org.hawods.lms.model.LmsVo;
 import org.hawods.lms.service.LmsService;
 import org.hawods.lms.util.PoiUtil;
 
+/**
+ * 
+ * 主窗口
+ * <p>
+ * 实现物流清单查询、新增、导出功能
+ * <p>
+ * 
+ * @author hawods
+ * @version 1.0
+ * @since 1.0
+ */
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 3211131366110667962L;
 
@@ -64,6 +75,11 @@ public class MainFrame extends JFrame {
 	private DataListTableModel tableModel = null;
 	private JPopupMenu tablePopupMenu = null;
 
+	/**
+	 * 程序异常退出
+	 * @param parent 消息提示框所属父窗口
+	 * @param message 提示消息
+	 */
 	public static void exitWithException(Component parent, String message) {
 		JOptionPane.showMessageDialog(parent, message + "，详情请查看 error.log",
 				"异常退出", JOptionPane.ERROR_MESSAGE);
@@ -97,6 +113,9 @@ public class MainFrame extends JFrame {
 		this.pack();
 	}
 
+	/**
+	 * 初始化组件
+	 */
 	private void initComponent() {
 		topPanel = new JPanel(new GridLayout(2, 0));
 
@@ -284,6 +303,11 @@ public class MainFrame extends JFrame {
 		this.add(new JScrollPane(dataTable));
 	}
 
+	/**
+	 * 往顶部panel添加带label的组件
+	 * @param labelText 标签显示的名字
+	 * @param component 添加的组件
+	 */
 	private void addTopComponent(String labelText, Component component) {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		GridBagConstraints constraints = new GridBagConstraints();
@@ -300,6 +324,10 @@ public class MainFrame extends JFrame {
 		topPanel.add(fieldPanel);
 	}
 
+	/**
+	 * 初始化外观
+	 * @param laf 外观名
+	 */
 	private void initLookAndFeel(String laf) {
 		for (LookAndFeelInfo lafi : UIManager.getInstalledLookAndFeels()) {
 			if (lafi.getName().equals(laf)) {

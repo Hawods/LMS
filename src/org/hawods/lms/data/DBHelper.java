@@ -11,11 +11,26 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * 
+ * 数据库管理对象
+ * <p>
+ * 实现数据库session的管理
+ * <p>
+ * 
+ * @author hawods
+ * @version 1.0
+ * @since 1.0
+ */
 public class DBHelper {
 	private static SqlSessionFactory sessionFactory = null;
 
 	private static Logger logger = LogManager.getLogger();
 
+	/**
+	 * 第一次调用时创建一个sessionFactory，检查数据库，根据需要初始化数据库
+	 * @return session
+	 */
 	public static SqlSession openSession() {
 		SqlSession sqlSession = null;
 		if (sessionFactory == null) {
@@ -55,6 +70,9 @@ public class DBHelper {
 		return sqlSession;
 	}
 
+	/**
+	 * 关闭数据库
+	 */
 	public static void closeDatabase() {
 		try {
 			DriverManager.getConnection("jdbc:derby:;shutdown=true");

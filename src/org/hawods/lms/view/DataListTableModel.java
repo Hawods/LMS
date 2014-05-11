@@ -1,11 +1,3 @@
-/*
- * 文件名：DataListTableModel.java
- * 版权：Copyright 2006-2014 Huawei Tech. Co. Ltd. All Rights Reserved. 
- * 描述： DataListTableModel.java
- * 修改人：panzili
- * 修改时间：2014-5-9
- * 修改内容：新增
- */
 package org.hawods.lms.view;
 
 import java.sql.Date;
@@ -20,28 +12,59 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hawods.lms.model.LmsVo;
 
+/**
+ * 
+ * 表格数据模型
+ * <p>
+ * 实现表格数据模型接口,提供表格数据获取和修改功能
+ * <p>
+ * 
+ * @author hawods
+ * @version 1.0
+ * @since 1.0
+ */
 public class DataListTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 6755785009248218829L;
+	
 	private Logger logger = LogManager.getLogger();
 
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	private List<LmsVo> dataList;
 
+	/**
+	 * 设置数据
+	 * @param dataList
+	 */
 	public void setDataList(List<LmsVo> dataList) {
 		this.dataList = dataList;
 		resetSum(false);
 		fireTableDataChanged();
 	}
 
+	/**
+	 * 获取数据
+	 * @return
+	 */
 	public List<LmsVo> getDataList() {
 		return dataList;
 	}
 
+	/**
+	 * 根据行号获取行
+	 * @param row
+	 * @return
+	 */
 	public LmsVo getRow(int row) {
 		return dataList.get(row);
 	}
 
+	/**
+	 * 插入行
+	 * @param row
+	 * @param vo
+	 * @return
+	 */
 	public LmsVo addRow(int row, LmsVo vo) {
 		if (dataList == null) {
 			dataList = new ArrayList<LmsVo>();
@@ -52,6 +75,11 @@ public class DataListTableModel extends AbstractTableModel {
 		return vo;
 	}
 
+	/**
+	 * 删除行
+	 * @param rows
+	 * @return
+	 */
 	public String[] deleteRow(int... rows) {
 		String[] idArr = new String[rows.length];
 		for (int i = rows.length - 1; i >= 0; i--) {
@@ -62,6 +90,10 @@ public class DataListTableModel extends AbstractTableModel {
 		return idArr;
 	}
 
+	/**
+	 * 计算合计行
+	 * @param clear 在计算前是否先清除原有的合计行
+	 */
 	private void resetSum(boolean clear) {
 		if (clear) {
 			dataList.remove(dataList.size() - 1);

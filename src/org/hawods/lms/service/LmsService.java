@@ -10,9 +10,24 @@ import org.hawods.lms.data.DBHelper;
 import org.hawods.lms.data.LmsMapper;
 import org.hawods.lms.model.LmsVo;
 
+/**
+ * 
+ * 业务层
+ * <p>
+ * 调用数据访问层，实现事务控制，数据库链接管理等
+ * <p>
+ * 
+ * @author hawods
+ * @version 1.0
+ * @since 1.0
+ */
 public class LmsService {
 	private Logger logger = LogManager.getLogger();
 
+	/**
+	 * 初始化数据库，可以在窗口刚打开时调用，避免用户实际开始查询时出现长时间的无法相应
+	 * @return
+	 */
 	public boolean initDatabase() {
 		SqlSession session = DBHelper.openSession();
 		if (session != null) {
@@ -22,6 +37,9 @@ public class LmsService {
 		}
 	}
 
+	/**
+	 * 释放数据库链接，并关闭数据库
+	 */
 	public void closeDatabase() {
 		DBHelper.closeDatabase();
 	}

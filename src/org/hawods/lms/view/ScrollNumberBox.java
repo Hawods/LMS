@@ -14,6 +14,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * 数值选择控件
+ * <p>
+ * 带加减按钮的数字选择控件，可以用鼠标在数字面板上滚动滚轮以实现快速增减
+ * <p>
+ * 
+ * @author hawods
+ * @version 1.0
+ * @since 1.0
+ */
 public class ScrollNumberBox extends JPanel
 {
     private static final long serialVersionUID = 8549336043282882364L;
@@ -90,11 +101,19 @@ public class ScrollNumberBox extends JPanel
         this.add(buttonPanel);
     }
 
+    /**
+     * 可以给本控件添加监听，主要用于当数字变化时向父控件发出通知
+     * @param actionListener
+     */
     public void addActionListener(ActionListener actionListener)
     {
         this.actionListener = actionListener;
     }
 
+    /**
+     * 数字变化，并发出通知
+     * @param value 加减的值
+     */
     public void addValue(int value)
     {
         setValue(this.value + value);
@@ -105,6 +124,10 @@ public class ScrollNumberBox extends JPanel
         }
     }
 
+    /**
+     * 获取当前值
+     * @return
+     */
     public int getValue()
     {
         return value;
@@ -131,6 +154,10 @@ public class ScrollNumberBox extends JPanel
                 downButton.getPreferredSize().width, height / 2));
     }
 
+    /**
+     * 直接设置一个值，不触发监听
+     * @param value
+     */
     public void setValue(int value)
     {
         if (value > maxValue)

@@ -16,9 +16,26 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.hawods.lms.model.LmsVo;
 import org.hawods.lms.view.Column;
 
+/**
+ * 
+ * 导入导出工具类
+ * <p>
+ * 可以导入导出excel格式文件
+ * <p>
+ * 
+ * @author hawods
+ * @version 1.0
+ * @since 1.0
+ */
 public final class PoiUtil {
 	public static Logger logger = LogManager.getLogger();
 
+	/**
+	 * 导出
+	 * @param path 用户选择的导出路径
+	 * @param dataList 导出数据
+	 * @return 实际导出的完整路径
+	 */
 	public static String exportExcel(String path, List<LmsVo> dataList) {
 		if (!path.endsWith(".xls")) {
 			path += ".xls";
@@ -104,6 +121,10 @@ public final class PoiUtil {
 		return null;
 	}
 
+	/**
+	 * 导入，暂未实现
+	 * @return
+	 */
 	public static boolean importExcel() {
 		return false;
 	}

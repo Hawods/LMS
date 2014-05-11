@@ -25,7 +25,31 @@ import javax.swing.border.Border;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
+/**
+ * 
+ * 日期选择控件
+ * <p>
+ * 已文本框为基础,点击后弹出一个日期选择层,选择后改变文本框的值
+ * <p>
+ * 
+ * @author hawods
+ * @version 1.0
+ * @since 1.0
+ */
 public class DateChooser extends JTextField {
+	private static final long serialVersionUID = 4594878189904796779L;
+
+	/**
+	 * 
+	 * 日期选择层
+	 * <p>
+	 * 实现JDialog但去掉了窗体,以实现弹出层的效果。
+	 * <p>
+	 * 
+	 * @author hawods
+	 * @version 1.0
+	 * @since 1.0
+	 */
 	private class DateDialog extends JDialog {
 		private static final long serialVersionUID = -74902793595095531L;
 
@@ -132,6 +156,13 @@ public class DateChooser extends JTextField {
 			this.setUndecorated(true);
 		}
 
+		/**
+		 * 以label实现天的选择
+		 * 
+		 * @param text
+		 *            每月的第几天
+		 * @return 封装好的天label
+		 */
 		private JLabel addDateLabel(String text) {
 			final JLabel dateLabel = new JLabel(text, JLabel.CENTER);
 			if (text != null && text.length() != 0) {
@@ -152,6 +183,9 @@ public class DateChooser extends JTextField {
 			return dateLabel;
 		}
 
+		/**
+		 * 重新设置天选择的label
+		 */
 		private void setDate() {
 			int count = 42;
 			int year = yearField.getValue();
@@ -182,6 +216,11 @@ public class DateChooser extends JTextField {
 			this.pack();
 		}
 
+		/**
+		 * 通过加边框实现天label按下的效果
+		 * 
+		 * @param dateLabel
+		 */
 		private void setSelectedLabel(JLabel dateLabel) {
 			if (selectedLabel != null) {
 				selectedLabel.setBorder(null);
@@ -190,6 +229,9 @@ public class DateChooser extends JTextField {
 			selectedLabel = dateLabel;
 		}
 
+		/**
+		 * 当弹出层显示时初始化，并记录原始值
+		 */
 		@Override
 		public void setVisible(boolean flag) {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -207,8 +249,6 @@ public class DateChooser extends JTextField {
 			super.setVisible(flag);
 		}
 	}
-
-	private static final long serialVersionUID = 4594878189904796779L;
 
 	private DateDialog dateDialog = new DateDialog();
 
@@ -245,6 +285,9 @@ public class DateChooser extends JTextField {
 		setText(text);
 	}
 
+	/**
+	 * 设置弹出层位置
+	 */
 	private void resetLocation() {
 		if (this.isShowing()) {
 			Point location = this.getLocationOnScreen();
