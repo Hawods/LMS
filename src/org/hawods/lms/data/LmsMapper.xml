@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hawods.lms.data.LmsMapper">
+	<sql id="lmsColumns">
+		id,name,phone,create_time,back_time,
+		start_station,end_station,shipper,receiver,
+		now_pay,take_pay,back_pay,loan,
+		deliver_charge,transfer_charge,sign,state
+	</sql>
+	<select id="checkTable" resultType="int">
+		SELECT COUNT(*) AS count
+		FROM SYS.SYSTABLES WHERE TABLENAME = 'LMS'
+	</select>
+	<insert id="createTable">
+		CREATE TABLE LMS(
+		id VARCHAR(10) NOT NULL PRIMARY KEY,
+		name VARCHAR(20),
+		phone VARCHAR(15),
+		create_time DATE,
+		back_time DATE,
+		start_station VARCHAR(10),
+		end_station VARCHAR(10),
+		shipper VARCHAR(10),
+		receiver VARCHAR(10),
+		now_pay NUMERIC(8,2),
+		take_pay NUMERIC(8,2),
+		back_pay NUMERIC(8,2),
+		loan NUMERIC(8,2),
+		deliver_charge NUMERIC(8,2),
+		transfer_charge NUMERIC(8,2),
+		sign VARCHAR(10),
+		state VARCHAR(20)
+		)
+	</insert>
+	<select id="select" parameterType="org.hawods.lms.model.LmsVo" resultType="org.hawods.lms.model.LmsVo">
+		SELECT
+		<include refid="lmsColumns"/>
+		FROM LMS 
+		WHERE id LIKE '%'||#{id}||'%' 
+		AND shipper LIKE '%'||#{shipper}||'%'
+		AND receiver LIKE '%'||#{receiver}||'%'
+		<![CDATA[
+		AND ('${startTime}' = '' OR create_time > #{startTime})
+		AND ('${endTime}' ='' OR create_time < #{endTime})
+		]]>
+		AND start_station = #{startStation}
+		AND end_station = #{endStation}
+		ORDER BY create_time
+	</select>
+	<select id="checkId" resultType="int">
+		SELECT COUNT(*) FROM LMS WHERE ID=#{id}
+	</select>
+	<insert id="insert" parameterType="org.hawods.lms.model.LmsVo">
+		INSERT INTO LMS (
+		<include refid="lmsColumns"/>
+		)
+		VALUES(
+		#{id},#{name},#{phone},#{createTime},#{backTime},
+		#{startStation},#{endStation},#{shipper},#{receiver},
+		#{nowPay},#{takePay},#{backPay},#{loan},
+		#{deliverCharge},#{transferCharge},#{sign},#{state}
+		)
+	</insert>
+	<update id="update" parameterType="org.hawods.lms.model.LmsVo">
+		UPDATE LMS SET 
+		name = #{name},phone = #{phone},create_time = #{createTime},back_time = #{backTime},
+		shipper = #{shipper},receiver = #{receiver},now_pay = #{nowPay},take_pay = #{takePay},
+		back_pay = #{backPay},loan = #{loan},deliver_charge = #{deliverCharge},
+		transfer_charge = #{transferCharge},sign = #{sign},state = #{state}
+		WHERE id = #{id}
+	</update>
+	<delete id="delete">
+		DELETE FROM LMS WHERE id = #{id}
+	</delete>
+</mapper>

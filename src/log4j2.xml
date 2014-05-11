@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		<File name="ibatis" fileName="logs/ibatis.log" append="false">
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+		</File>
+		<File name="error" fileName="logs/error.log" append="false">
+			<ThresholdFilter level="error" onMatch="ACCEPT"
+				onMismatch="DENY" />
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />
+		</File>
+		<RollingFile name="rollingFile" fileName="logs/lms.log"
+			filePattern="logs/lms-$${date:MM-dd-yyyy}-%i.log.zip">
+			<PatternLayout>
+				<Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<SizeBasedTriggeringPolicy size="50 MB" />
+			<DefaultRolloverStrategy compressionLevel="9" />
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="org.apache.ibatis" level="error" additivity="false">
+			<AppenderRef ref="ibatis" />
+		</Logger>
+		<Logger name="org.hawods" level="info">
+			<AppenderRef ref="error" />
+			<AppenderRef ref="rollingFile" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="console" />
+		</Root>
+	</Loggers>
+</Configuration>
