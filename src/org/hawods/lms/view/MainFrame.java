@@ -52,7 +52,7 @@ import org.hawods.lms.util.PoiUtil;
  * <p>
  * 
  * @author hawods
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 public class MainFrame extends JFrame {
@@ -77,8 +77,11 @@ public class MainFrame extends JFrame {
 
 	/**
 	 * 程序异常退出
-	 * @param parent 消息提示框所属父窗口
-	 * @param message 提示消息
+	 * 
+	 * @param parent
+	 *            消息提示框所属父窗口
+	 * @param message
+	 *            提示消息
 	 */
 	public static void exitWithException(Component parent, String message) {
 		JOptionPane.showMessageDialog(parent, message + "，详情请查看 error.log",
@@ -104,7 +107,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		this.setTitle("物流管理系统 Beta1.0 by Hawods");
+		this.setTitle("物流管理系统 Beta1.1 by Hawods");
 		this.setLocationByPlatform(true);
 		this.setMinimumSize(new Dimension(600, 400));
 		this.setPreferredSize(new Dimension(900, 700));
@@ -270,8 +273,9 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (e.getButton() == MouseEvent.BUTTON3) {
-					tablePopupMenu.show(MainFrame.this, e.getXOnScreen(),
-							e.getYOnScreen());
+					tablePopupMenu.show(MainFrame.this, e.getXOnScreen()
+							- MainFrame.this.getX(), e.getYOnScreen()
+							- MainFrame.this.getY());
 				}
 			}
 		});
@@ -305,8 +309,11 @@ public class MainFrame extends JFrame {
 
 	/**
 	 * 往顶部panel添加带label的组件
-	 * @param labelText 标签显示的名字
-	 * @param component 添加的组件
+	 * 
+	 * @param labelText
+	 *            标签显示的名字
+	 * @param component
+	 *            添加的组件
 	 */
 	private void addTopComponent(String labelText, Component component) {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -326,7 +333,9 @@ public class MainFrame extends JFrame {
 
 	/**
 	 * 初始化外观
-	 * @param laf 外观名
+	 * 
+	 * @param laf
+	 *            外观名
 	 */
 	private void initLookAndFeel(String laf) {
 		for (LookAndFeelInfo lafi : UIManager.getInstalledLookAndFeels()) {

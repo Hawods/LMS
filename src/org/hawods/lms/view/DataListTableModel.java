@@ -20,12 +20,12 @@ import org.hawods.lms.model.LmsVo;
  * <p>
  * 
  * @author hawods
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 public class DataListTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 6755785009248218829L;
-	
+
 	private Logger logger = LogManager.getLogger();
 
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -34,6 +34,7 @@ public class DataListTableModel extends AbstractTableModel {
 
 	/**
 	 * 设置数据
+	 * 
 	 * @param dataList
 	 */
 	public void setDataList(List<LmsVo> dataList) {
@@ -44,6 +45,7 @@ public class DataListTableModel extends AbstractTableModel {
 
 	/**
 	 * 获取数据
+	 * 
 	 * @return
 	 */
 	public List<LmsVo> getDataList() {
@@ -52,6 +54,7 @@ public class DataListTableModel extends AbstractTableModel {
 
 	/**
 	 * 根据行号获取行
+	 * 
 	 * @param row
 	 * @return
 	 */
@@ -61,6 +64,7 @@ public class DataListTableModel extends AbstractTableModel {
 
 	/**
 	 * 插入行
+	 * 
 	 * @param row
 	 * @param vo
 	 * @return
@@ -77,6 +81,7 @@ public class DataListTableModel extends AbstractTableModel {
 
 	/**
 	 * 删除行
+	 * 
 	 * @param rows
 	 * @return
 	 */
@@ -92,7 +97,9 @@ public class DataListTableModel extends AbstractTableModel {
 
 	/**
 	 * 计算合计行
-	 * @param clear 在计算前是否先清除原有的合计行
+	 * 
+	 * @param clear
+	 *            在计算前是否先清除原有的合计行
 	 */
 	private void resetSum(boolean clear) {
 		if (clear) {
@@ -136,6 +143,9 @@ public class DataListTableModel extends AbstractTableModel {
 		sumVo.setTransferCharge(transferCharge);
 		backVo.setName("应返");
 		backVo.setNowPay(takePay + loan - deliverCharge);
+		backVo.setTransferCharge(nowPay + takePay + backPay - deliverCharge
+				- transferCharge);
+		backVo.setSign("利润");
 		dataList.add(sumVo);
 		dataList.add(backVo);
 	}
